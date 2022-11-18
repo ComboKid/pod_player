@@ -40,11 +40,11 @@ class PodVideoPlayer extends StatefulWidget {
   final bool matchFrameAspectRatioToVideo;
   final PodProgressBarConfig podProgressBarConfig;
   final PodPlayerLabels podPlayerLabels;
-  final Widget Function(OverLayOptions options)? overlayBuilder;
+  final Widget Function(OverLayOptions options, Widget defaultOverlay, Widget playPause)? overlayBuilder;
   final Widget Function()? onVideoError;
   final Widget? videoTitle;
   final Color? backgroundColor;
-  final DecorationImage? videoThumbnail;
+  final Widget? videoThumbnail;
 
   /// Optional callback, fired when full screen mode toggles.
   ///
@@ -233,11 +233,20 @@ class _PodVideoPlayerState extends State<PodVideoPlayer>
         ),
         tween: Tween<double>(begin: 0.2, end: 0.7),
         duration: const Duration(milliseconds: 400),
-        child: DecoratedBox(
+        /*child: DecoratedBox(
           decoration: BoxDecoration(image: widget.videoThumbnail),
           child: Center(
             child: _buildLoading(),
           ),
+        ),*/
+        child: Stack(
+          children: [
+            if(widget.videoThumbnail != null)
+                widget.videoThumbnail!,
+            Center(
+              child: _buildLoading(),
+            ),
+          ],
         ),
       ),
     );

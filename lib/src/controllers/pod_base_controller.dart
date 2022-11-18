@@ -40,14 +40,18 @@ class _PodBaseController extends GetxController {
   ///**listners
 
   Future<void> videoListner() async {
-    if (!_videoCtr!.value.isInitialized) {
-      await _videoCtr!.initialize();
-    }
-    if (_videoCtr!.value.isInitialized) {
-      _listneToVideoState();
-      _listneToVideoPosition();
-      _listneToVolume();
-      if (kIsWeb && autoPlay && isMute && !_isWebAutoPlayDone) _webAutoPlay();
+    try{
+      if (!_videoCtr!.value.isInitialized) {
+        await _videoCtr!.initialize();
+      }
+      if (_videoCtr!.value.isInitialized) {
+        _listneToVideoState();
+        _listneToVideoPosition();
+        _listneToVolume();
+        if (kIsWeb && autoPlay && isMute && !_isWebAutoPlayDone) _webAutoPlay();
+      }
+    }catch (e){
+      e.printError();
     }
   }
 

@@ -11,6 +11,26 @@ class _VideoOverlays extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _podCtr = Get.find<PodGetXVideoController>(tag: tag);
+    final playPauseIcon = _AnimatedPlayPauseIcon(tag: tag, size: 42);
+
+    final defaultOverlay = GetBuilder<PodGetXVideoController>(
+      tag: tag,
+      id: 'overlay',
+      builder: (_podCtr) {
+        return AnimatedOpacity(
+          duration: const Duration(milliseconds: 200),
+          opacity: _podCtr.isOverlayVisible ? 1 : 0,
+          child: Stack(
+            fit: StackFit.passthrough,
+            children: [
+              if (!kIsWeb) _MobileOverlay(tag: tag, playPauseIcon: playPauseIcon,),
+              if (kIsWeb) _WebOverlay(tag: tag),
+            ],
+          ),
+        );
+      },
+    );
+
     if (_podCtr.overlayBuilder != null) {
       return GetBuilder<PodGetXVideoController>(
         id: 'update-all',
@@ -38,28 +58,12 @@ class _VideoOverlays extends StatelessWidget {
 
           /// Returns the custom overlay, otherwise returns the default
           /// overlay with gesture detector
-          return _podCtr.overlayBuilder!(overlayOptions);
+          return _podCtr.overlayBuilder!(overlayOptions, defaultOverlay, playPauseIcon);
         },
       );
     } else {
       ///Built in overlay
-      return GetBuilder<PodGetXVideoController>(
-        tag: tag,
-        id: 'overlay',
-        builder: (_podCtr) {
-          return AnimatedOpacity(
-            duration: const Duration(milliseconds: 200),
-            opacity: _podCtr.isOverlayVisible ? 1 : 0,
-            child: Stack(
-              fit: StackFit.passthrough,
-              children: [
-                if (!kIsWeb) _MobileOverlay(tag: tag),
-                if (kIsWeb) _WebOverlay(tag: tag),
-              ],
-            ),
-          );
-        },
-      );
+      return defaultOverlay;
     }
   }
 }

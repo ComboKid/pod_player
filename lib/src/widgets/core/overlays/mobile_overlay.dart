@@ -2,10 +2,12 @@ part of 'package:pod_player/src/pod_player.dart';
 
 class _MobileOverlay extends StatelessWidget {
   final String tag;
+  final _AnimatedPlayPauseIcon playPauseIcon;
 
   const _MobileOverlay({
     Key? key,
     required this.tag,
+    required this.playPauseIcon,
   }) : super(key: key);
 
   @override
@@ -40,7 +42,7 @@ class _MobileOverlay extends StatelessWidget {
                 child: SizedBox(
                   height: double.infinity,
                   child: Center(
-                    child: _AnimatedPlayPauseIcon(tag: tag, size: 42),
+                    child: playPauseIcon,
                   ),
                 ),
               ),
@@ -118,7 +120,7 @@ class _MobileOverlay extends StatelessWidget {
   void _bottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      builder: (context) => SafeArea(child: _MobileBottomSheet(tag: tag)),
+      builder: (context) => _MobileBottomSheet(tag: tag),
     );
   }
 }

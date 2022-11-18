@@ -121,7 +121,9 @@ class PodPlayerController {
   //! video play/pause
 
   /// plays the video
-  void play() => _ctr.podVideoStateChanger(PodVideoState.playing);
+  void play() {
+    _ctr.podVideoStateChanger(PodVideoState.playing);
+  }
 
   /// pauses the video
   void pause() => _ctr.podVideoStateChanger(PodVideoState.paused);
@@ -178,6 +180,7 @@ class PodPlayerController {
   Future<void> changeVideo({
     required PlayVideoFrom playVideoFrom,
     PodPlayerConfig playerConfig = const PodPlayerConfig(),
+    required bool Function() customAutoplayCondition
   }) =>
       _ctr.changeVideo(
         playVideoFrom: playVideoFrom,

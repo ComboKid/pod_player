@@ -57,10 +57,17 @@ class _PodCoreVideoPlayer extends StatelessWidget {
                           ),
                           tween: Tween<double>(begin: 0.7, end: 1),
                           duration: const Duration(milliseconds: 400),
-                          child: DecoratedBox(
+                          /*child: DecoratedBox(
                             decoration: BoxDecoration(
                               image: _podCtr.videoThumbnail,
                             ),
+                          ),*/
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              if (_podCtr.videoThumbnail != null)
+                                _podCtr.videoThumbnail!,
+                            ],
                           ),
                         ),
                       );

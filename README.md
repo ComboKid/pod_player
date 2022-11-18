@@ -1,3 +1,5 @@
+# Combokid's Player based on POD Player
+
 <h1 align="center">
   <a href="https://github.com/newtaDev"><img src="https://user-images.githubusercontent.com/85326522/159757765-db86f850-fea8-4dc2-bd86-0a27648b24e5.png" alt="pod_player"></a>
 </h1>

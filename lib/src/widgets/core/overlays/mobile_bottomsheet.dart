@@ -25,11 +25,9 @@ class _MobileBottomSheet extends StatelessWidget {
                 Timer(const Duration(milliseconds: 100), () {
                   showModalBottomSheet(
                     context: context,
-                    builder: (context) => SafeArea(
-                      child: _VideoQualitySelectorMob(
-                        tag: tag,
-                        onTap: null,
-                      ),
+                    builder: (context) => _VideoQualitySelectorMob(
+                      tag: tag,
+                      onTap: null,
                     ),
                   );
                 });
@@ -59,11 +57,9 @@ class _MobileBottomSheet extends StatelessWidget {
                 showModalBottomSheet(
                   context: context,
                   isScrollControlled: true,
-                  builder: (context) => SafeArea(
-                    child: _VideoPlaybackSelectorMob(
-                      tag: tag,
-                      onTap: null,
-                    ),
+                  builder: (context) => _VideoPlaybackSelectorMob(
+                    tag: tag,
+                    onTap: null,
                   ),
                 );
               });
@@ -191,7 +187,7 @@ class _MobileOverlayBottomControlles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const durationTextStyle = TextStyle(color: Colors.white70);
+    const durationTextStyle = TextStyle(color: Colors.white70, fontSize: 24);
     const itemColor = Colors.white;
 
     return GetBuilder<PodGetXVideoController>(
@@ -211,7 +207,7 @@ class _MobileOverlayBottomControlles extends StatelessWidget {
                     children: [
                       Text(
                         _podCtr.calculateVideoDuration(_podCtr.videoPosition),
-                        style: const TextStyle(color: itemColor),
+                        style: const TextStyle(color: itemColor, fontSize: 24),
                       ),
                       const Text(
                         ' / ',
