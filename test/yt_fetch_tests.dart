@@ -16,5 +16,8 @@ Future getUrls () async {
 }
 
 void main() async {
-  await getUrls();
+  // await getUrls();
+
+  final yt = YoutubeExplode();
+  final video = await yt.videos.streamsClient.getManifest('y6O-n7WTuPk');
 }
